@@ -26,24 +26,23 @@ void usage()
 
 int checksum(std::ifstream &ifile)
 {
-	uint32_t checksum = 0;
-	const int BUF_SIZE = 4;
-	while (ifile)
-	{
-		uint32_t buf = 0;
-		ifile.read(reinterpret_cast<char*>(&buf),BUF_SIZE);
-		checksum += buf;
-	}
-	return checksum;
+    uint32_t checksum = 0;
+    const int BUF_SIZE = 4;
+    while(ifile)
+    {
+        uint32_t buf = 0;
+        ifile.read(reinterpret_cast<char*>(&buf),BUF_SIZE);
+        checksum += buf;
+    }
+    return checksum;
 }
 
 int main(int argc, char* argv[])
 {
     //usage();
-	std::ifstream ifile;
-	ifile.open("input.txt",std::ios::binary);
-	std::cout << std::hex << std::setw(8) << std::setfill('0') << checksum(ifile) << std::endl;
-	ifile.close();
-	return 0;
+    std::ifstream ifile;
+    ifile.open("input.txt",std::ios::binary);
+    std::cout << std::hex << std::setw(8) << std::setfill('0') << checksum(ifile) << std::endl;
+    ifile.close();
+    return 0;
 }
-
