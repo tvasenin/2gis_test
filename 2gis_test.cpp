@@ -29,7 +29,7 @@ void usage()
 int checksum(std::ifstream &ifile)
 {
     uint32_t checksum = 0;
-    const int BUF_SIZE = 4;
+    const std::streamsize BUF_SIZE = 4;
     while(ifile)
     {
         uint32_t buf = 0;
