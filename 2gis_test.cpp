@@ -33,7 +33,7 @@ int checksum(std::ifstream &ifile)
     while(ifile)
     {
         uint32_t buf = 0;
-        ifile.read(reinterpret_cast<char*>(&buf),BUF_SIZE);
+        ifile.read(reinterpret_cast<char*>(&buf), BUF_SIZE);
         checksum += buf;
     }
     return checksum;
@@ -48,13 +48,13 @@ int_fast64_t wordcount(std::ifstream &ifile, const char* s)
     char *buf = new char[buf_size+len];
     char *match = buf - 1;
     
-    ifile.read(buf,len-1);
+    ifile.read(buf, len-1);
     buf[ifile.gcount()] = 0;
     while(ifile) {
-        ifile.read(buf+len-1,buf_size);
+        ifile.read(buf+len-1, buf_size);
         buf[len-1 + ifile.gcount()] = 0;
         do {
-            match = std::strstr(match + 1,s);
+            match = std::strstr(match + 1, s);
             cnt++;
         } while (match != NULL);
         cnt--;
@@ -71,11 +71,11 @@ int main(int argc, char* argv[])
     char *mode       = NULL;
     
     for (int loop = 1 ; loop < argc ; loop++) {
-        if      (0 == std::strcmp(argv[loop],"-h")) {
+        if      (0 == std::strcmp(argv[loop], "-h")) {
             usage(std::cout);
             return 0;
         }
-        else if (0 == std::strcmp(argv[loop],"-f")) {
+        else if (0 == std::strcmp(argv[loop], "-f")) {
             if (argc > loop) {
                 ifname = argv[++loop];
             }
@@ -84,7 +84,7 @@ int main(int argc, char* argv[])
                 return 1;
             }
         }
-        else if (0 == std::strcmp(argv[loop],"-m")) {
+        else if (0 == std::strcmp(argv[loop], "-m")) {
             if (argc > loop) {
                 mode = argv[++loop];
             }
@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
                 return 1;
             }
         }
-        else if (0 == std::strcmp(argv[loop],"-v")) {
+        else if (0 == std::strcmp(argv[loop], "-v")) {
             if (argc > loop) {
                 search_str = argv[++loop];
             }
