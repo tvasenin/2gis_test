@@ -72,6 +72,11 @@ int main(int argc, char* argv[])
     char *search_str = NULL;
     char *mode       = NULL;
     
+    if (argc < 2){
+        std::cerr << "No input arguments specified, use -h for help." << std::endl;
+        return 1;
+    }
+
     for (int loop = 1 ; loop < argc ; loop++) {
         if      (0 == std::strcmp(argv[loop], "-h")) {
             usage(std::cout);
@@ -79,33 +84,65 @@ int main(int argc, char* argv[])
         }
         else if (0 == std::strcmp(argv[loop], "-f")) {
             if (argc <= loop + 1) {
-                usage(std::cerr);
+                std::cerr << "No argument specified for "<< argv[loop] << std::endl;
                 return 1;
             }
             else {
-                ifname = argv[++loop];
+                if (ifname) {
+                    std::cerr << "Duplicate "<< argv[loop] << " options are not allowed." << std::endl;
+                    return 1;
+                }
+                else
+                    ifname = argv[++loop];
+                    if (!*ifname) {
+                        std::cerr << "Empty filename is not allowed." << std::endl;
+                        return 1;
+                    }
             }
         }
         else if (0 == std::strcmp(argv[loop], "-m")) {
             if (argc <= loop + 1) {
-                usage(std::cerr);
+                std::cerr << "No argument specified for "<< argv[loop] << std::endl;
                 return 1;
             }
             else {
-                mode = argv[++loop];
+                if (mode) {
+                    std::cerr << "Duplicate "<< argv[loop] << " options are not allowed." << std::endl;
+                    return 1;
+                }
+                else
+                    mode = argv[++loop];
+                    if (!*mode) {
+                        std::cerr << "Empty mode is not allowed." << std::endl;
+                        return 1;
+                    }
+                    if ( (0 != std::strcmp(mode, "checksum")) && (0 != std::strcmp(mode, "words")) ) {
+                        std::cerr << "Incorrect mode specified, use -h for help." << std::endl;
+                        return 1;
+                    }
             }
         }
         else if (0 == std::strcmp(argv[loop], "-v")) {
             if (argc <= loop + 1) {
-                usage(std::cerr);
+                std::cerr << "No argument specified for "<< argv[loop] << std::endl;
                 return 1;
             }
             else {
-                search_str = argv[++loop];
+                if (search_str) {
+                    std::cerr << "Duplicate "<< argv[loop] << " options are not allowed." << std::endl;
+                    return 1;
+                }
+                else {
+                    search_str = argv[++loop];
+                    if (!*search_str) {
+                        std::cerr << "Empty word is not allowed." << std::endl;
+                        return 1;
+                    }
+                }
             }
         }
         else {
-            usage(std::cerr);
+            std::cerr << "Unknown option " << argv[loop] << ", use -h for help." << std::endl;
             return 1;
         }
     }
@@ -119,7 +156,7 @@ int main(int argc, char* argv[])
         return 1;
     }
     if  (((!search_str || !*search_str) && (0 == std::strcmp(mode, "words")))) {
-        std::cerr << "Option -v with non-empty word if required in 'words' mode, use -h for help." << std::endl;
+        std::cerr << "Option -v is required in 'words' mode, use -h for help." << std::endl;
         return 1;
     }
     if  (search_str && (0 == std::strcmp(mode, "checksum"))) {
@@ -130,7 +167,7 @@ int main(int argc, char* argv[])
     ifile.open(ifname, std::ios::binary);
     
     if (!ifile.is_open()) {
-        std::cerr << "Error! Couldn't open input file!" << std::endl;
+        std::cerr << "Couldn't open input file." << std::endl;
         return 1;
     }
 
