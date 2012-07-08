@@ -66,7 +66,63 @@ int main(int argc, char* argv[])
 {
     //usage(std::cout);
     std::ifstream ifile;
+    char *ifname     = NULL;
+    char *search_str = NULL;
+    char *mode       = NULL;
     
+    for (int loop = 1 ; loop < argc ; loop++) {
+        if      (0 == std::strcmp(argv[loop],"-h")) {
+            usage(std::cout);
+            return 0;
+        }
+        else if (0 == std::strcmp(argv[loop],"-f")) {
+            if (argc > loop) {
+                ifname = argv[++loop];
+            }
+            else {
+                usage(std::cerr);
+                return 1;
+            }
+        }
+        else if (0 == std::strcmp(argv[loop],"-m")) {
+            if (argc > loop) {
+                mode = argv[++loop];
+            }
+            else {
+                usage(std::cerr);
+                return 1;
+            }
+        }
+        else if (0 == std::strcmp(argv[loop],"-v")) {
+            if (argc > loop) {
+                search_str = argv[++loop];
+            }
+            else {
+                usage(std::cerr);
+                return 1;
+            }
+        }
+        else {
+            usage(std::cerr);
+            return 1;
+        }
+    }
+
+    if (!ifname || !mode) {
+        usage(std::cerr);
+        return 1;
+    }
+
+    if ((!search_str || !*search_str) && (0 == std::strcmp(mode, "words"))) {
+        usage(std::cerr);
+        return 1;
+    }
+
+    if ( (0 != std::strcmp(mode, "checksum")) && (0 != std::strcmp(mode, "words")) ) {
+        usage(std::cerr);
+        return 1;
+    }
+
     ifile.open("input.txt",std::ios::binary);
     std::cout << std::hex << std::setw(8) << std::setfill('0') << checksum(ifile) << std::endl;
     ifile.close();
