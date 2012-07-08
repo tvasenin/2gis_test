@@ -5,7 +5,9 @@
 #include <iomanip>
 #include <fstream>
 #include <cassert>
+#include <cstring>
 #include <algorithm>
+//#include <cstdint>
 #include <stdint.h>
 
 
