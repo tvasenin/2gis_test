@@ -11,20 +11,20 @@
 #include <stdint.h>
 
 
-void usage(std::ostream &cstream)
+void usage()
 {
-   cstream << "Test -- 2gis test utility"                                                 << std::endl;
-   cstream                                                                                << std::endl;
-   cstream << "Usage:"                                                                    << std::endl;
-   cstream << "  test -f <filename> -m words -v <word>"                                   << std::endl;
-   cstream << "  test -f <filename> -m checksum"                                          << std::endl;
-   cstream << "  test -h"                                                                 << std::endl;
-   cstream                                                                                << std::endl;
-   cstream << "Options:"                                                                  << std::endl;
-   cstream << "  -f <filename>        filename for processing"                            << std::endl;
-   cstream << "  -m (words|checksum)  mode (word occurence count or checksum generation)" << std::endl;
-   cstream << "  -v <word>            word to count its occurences (case-sensitive)"      << std::endl;
-   cstream << "  -h                   show this screen"                                   << std::endl;
+   std::cout << "Test -- 2gis test utility"                                                 << std::endl;
+   std::cout                                                                                << std::endl;
+   std::cout << "Usage:"                                                                    << std::endl;
+   std::cout << "  test -f <filename> -m words -v <word>"                                   << std::endl;
+   std::cout << "  test -f <filename> -m checksum"                                          << std::endl;
+   std::cout << "  test -h"                                                                 << std::endl;
+   std::cout                                                                                << std::endl;
+   std::cout << "Options:"                                                                  << std::endl;
+   std::cout << "  -f <filename>        filename for processing"                            << std::endl;
+   std::cout << "  -m (words|checksum)  mode (word occurence count or checksum generation)" << std::endl;
+   std::cout << "  -v <word>            word to count its occurences (case-sensitive)"      << std::endl;
+   std::cout << "  -h                   show this screen"                                   << std::endl;
 }
 
 int checksum(std::ifstream &ifile)
@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 
     for (int loop = 1 ; loop < argc ; loop++) {
         if      (0 == std::strcmp(argv[loop], "-h")) {
-            usage(std::cout);
+            usage();
             return 0;
         }
         else if (0 == std::strcmp(argv[loop], "-f")) {
