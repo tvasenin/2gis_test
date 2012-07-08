@@ -123,12 +123,18 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    ifile.open("input.txt",std::ios::binary);
-    std::cout << std::hex << std::setw(8) << std::setfill('0') << checksum(ifile) << std::endl;
-    ifile.close();
+    ifile.open(ifname, std::ios::binary);
     
-    ifile.open("input2.txt",std::ios::binary);
-    std::cout << wordcount(ifile,"test") << std::endl;
+    if (!ifile.is_open()) {
+        std::cerr << "Error! Couldn't open input file!" << std::endl;
+        return 1;
+    }
+
+    if      (0 == std::strcmp(mode, "checksum"))
+        std::cout << std::hex << std::setw(8) << std::setfill('0') << checksum(ifile) << std::endl;
+    else if (0 == std::strcmp(mode, "words"))
+        std::cout << wordcount(ifile, search_str) << std::endl;
+    
     ifile.close();
     
     return 0;
