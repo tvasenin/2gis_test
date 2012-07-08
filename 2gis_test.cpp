@@ -155,7 +155,7 @@ int main(int argc, char* argv[])
         std::cerr << "No input file specified, use -h for help." << std::endl;
         return 1;
     }
-    if  (((!search_str || !*search_str) && (0 == std::strcmp(mode, "words")))) {
+    if  (!search_str && (0 == std::strcmp(mode, "words"))) {
         std::cerr << "Option -v is required in 'words' mode, use -h for help." << std::endl;
         return 1;
     }
