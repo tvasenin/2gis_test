@@ -23,7 +23,7 @@ void usage(std::ostream &cstream)
    cstream << "Options:"                                                                  << std::endl;
    cstream << "  -f <filename>        filename for processing"                            << std::endl;
    cstream << "  -m (words|checksum)  mode (word occurence count or checksum generation)" << std::endl;
-   cstream << "  -v <word>            word to count its occurences the input file"        << std::endl;
+   cstream << "  -v <word>            word to count its occurences (case-sensitive)"      << std::endl;
    cstream << "  -h                   show this screen"                                   << std::endl;
 }
 
