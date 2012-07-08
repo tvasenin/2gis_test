@@ -9,21 +9,21 @@
 #include <stdint.h>
 
 
-void usage()
+void usage(std::ostream &cstream)
 {
-   std::cerr << "Test -- 2gis test utility"                                                 << std::endl;
-   std::cerr                                                                                << std::endl;
-   std::cerr << "Usage:"                                                                    << std::endl;
-   std::cerr << "  test -f <filename> -m words -v <word>"                                   << std::endl;
-   std::cerr << "  test -f <filename> -m checksum"                                          << std::endl;
-   std::cerr << "  test -h"                                                                 << std::endl;
-   std::cerr                                                                                << std::endl;
-   std::cerr << "Options:"                                                                  << std::endl;
-   std::cerr << "  -h                   show this screen"                                   << std::endl;
-   std::cerr << "  -f <filename>        filename for processing"                            << std::endl;
-   std::cerr << "  -m (words|checksum)  mode (word occurence count or checksum generation)" << std::endl;
-   std::cerr << "  -v <word>            word to count its occurences the input file"        << std::endl;
-   std::cerr                                                                                << std::endl;
+   cstream << "Test -- 2gis test utility"                                                 << std::endl;
+   cstream                                                                                << std::endl;
+   cstream << "Usage:"                                                                    << std::endl;
+   cstream << "  test -f <filename> -m words -v <word>"                                   << std::endl;
+   cstream << "  test -f <filename> -m checksum"                                          << std::endl;
+   cstream << "  test -h"                                                                 << std::endl;
+   cstream                                                                                << std::endl;
+   cstream << "Options:"                                                                  << std::endl;
+   cstream << "  -h                   show this screen"                                   << std::endl;
+   cstream << "  -f <filename>        filename for processing"                            << std::endl;
+   cstream << "  -m (words|checksum)  mode (word occurence count or checksum generation)" << std::endl;
+   cstream << "  -v <word>            word to count its occurences the input file"        << std::endl;
+   cstream                                                                                << std::endl;
 }
 
 int checksum(std::ifstream &ifile)
@@ -64,7 +64,7 @@ int wordcount(std::ifstream &ifile, const char* s)
 
 int main(int argc, char* argv[])
 {
-    //usage();
+    //usage(std::cout);
     std::ifstream ifile;
     
     ifile.open("input.txt",std::ios::binary);
