@@ -4,6 +4,8 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <cassert>
+#include <algorithm>
 #include <stdint.h>
 
 
@@ -37,6 +39,29 @@ int checksum(std::ifstream &ifile)
     return checksum;
 }
 
+int wordcount(std::ifstream &ifile, const char* s)
+{
+    size_t len = std::strlen(s);
+    int_fast64_t cnt = 0;
+    assert(len > 0);
+    std::streamsize buf_size = (len < 4096)?4096:len;
+    char* buf = new char[buf_size+len];
+    char* match = buf - 1;
+    
+    ifile.read(buf,len-1);
+    buf[ifile.gcount()] = 0;
+    while(ifile) {
+        ifile.read(buf+len-1,buf_size);
+        buf[len-1 + ifile.gcount()] = 0;
+        do {
+            match = std::strstr(match + 1,s);
+            cnt++;
+        } while (match != NULL);
+        cnt--;
+    }
+    return cnt;
+}
+
 int main(int argc, char* argv[])
 {
     //usage();
@@ -44,5 +69,10 @@ int main(int argc, char* argv[])
     ifile.open("input.txt",std::ios::binary);
     std::cout << std::hex << std::setw(8) << std::setfill('0') << checksum(ifile) << std::endl;
     ifile.close();
+
+    ifile.open("input2.txt",std::ios::binary);
+    std::cout << wordcount(ifile,"test") << std::endl;
+    ifile.close();
+    
     return 0;
 }
