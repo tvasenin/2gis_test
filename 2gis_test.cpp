@@ -1,4 +1,4 @@
-// 2gis_test.cpp : Defines the entry point for the console application.
+// Test -- 2gis test utility
 //
 
 #include <iostream>
@@ -25,7 +25,6 @@ void usage(std::ostream &cstream)
    cstream << "  -m (words|checksum)  mode (word occurence count or checksum generation)" << std::endl;
    cstream << "  -v <word>            word to count its occurences the input file"        << std::endl;
    cstream << "  -h                   show this screen"                                   << std::endl;
-   cstream                                                                                << std::endl;
 }
 
 int checksum(std::ifstream &ifile)
@@ -66,7 +65,6 @@ int_fast64_t wordcount(std::ifstream &ifile, const char* s)
 
 int main(int argc, char* argv[])
 {
-    //usage(std::cout);
     std::ifstream ifile;
     char *ifname     = NULL;
     char *search_str = NULL;
