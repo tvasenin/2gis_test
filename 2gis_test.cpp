@@ -110,21 +110,23 @@ int main(int argc, char* argv[])
         }
     }
 
-    if (!ifname || !mode) {
-        usage(std::cerr);
+    if  (!mode) {
+        std::cerr << "No mode specified, use -h for help." << std::endl;
         return 1;
     }
-
-    if ((!search_str || !*search_str) && (0 == std::strcmp(mode, "words"))) {
-        usage(std::cerr);
+    if  (!ifname) {
+        std::cerr << "No input file specified, use -h for help." << std::endl;
         return 1;
     }
-
-    if ( (0 != std::strcmp(mode, "checksum")) && (0 != std::strcmp(mode, "words")) ) {
-        usage(std::cerr);
+    if  (((!search_str || !*search_str) && (0 == std::strcmp(mode, "words")))) {
+        std::cerr << "Option -v with non-empty word if required in 'words' mode, use -h for help." << std::endl;
         return 1;
     }
-
+    if  (search_str && (0 == std::strcmp(mode, "checksum"))) {
+        std::cerr << "Option -v is not allowed in 'checksum' mode, use -h for help." << std::endl;
+        return 1;
+    }
+    
     ifile.open(ifname, std::ios::binary);
     
     if (!ifile.is_open()) {
