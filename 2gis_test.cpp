@@ -39,7 +39,7 @@ int checksum(std::ifstream &ifile)
     return checksum;
 }
 
-int wordcount(std::ifstream &ifile, const char* s)
+int_fast64_t wordcount(std::ifstream &ifile, const char* s)
 {
     size_t len = std::strlen(s);
     int_fast64_t cnt = 0;
