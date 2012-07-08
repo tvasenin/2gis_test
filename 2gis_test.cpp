@@ -78,30 +78,30 @@ int main(int argc, char* argv[])
             return 0;
         }
         else if (0 == std::strcmp(argv[loop], "-f")) {
-            if (argc > loop) {
-                ifname = argv[++loop];
-            }
-            else {
+            if (argc <= ++loop) {
                 usage(std::cerr);
                 return 1;
+            }
+            else {
+                ifname = argv[loop];
             }
         }
         else if (0 == std::strcmp(argv[loop], "-m")) {
-            if (argc > loop) {
-                mode = argv[++loop];
-            }
-            else {
+            if (argc <= ++loop) {
                 usage(std::cerr);
                 return 1;
+            }
+            else {
+                mode = argv[loop];
             }
         }
         else if (0 == std::strcmp(argv[loop], "-v")) {
-            if (argc > loop) {
-                search_str = argv[++loop];
-            }
-            else {
+            if (argc <= ++loop) {
                 usage(std::cerr);
                 return 1;
+            }
+            else {
+                search_str = argv[loop];
             }
         }
         else {
