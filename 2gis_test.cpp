@@ -42,9 +42,9 @@ int checksum(std::ifstream &ifile)
 int_fast64_t wordcount(std::ifstream &ifile, const char* s)
 {
     size_t len = std::strlen(s);
-    int_fast64_t cnt = 0;
     assert(len > 0);
-    std::streamsize buf_size = (len < 4096)?4096:len;
+    int_fast64_t cnt = 0;
+    size_t buf_size = (len < 4096)?4096:len;
     char *buf = new char[buf_size+len];
     char *match = buf - 1;
     
