@@ -19,10 +19,10 @@ void usage(std::ostream &cstream)
    cstream << "  test -h"                                                                 << std::endl;
    cstream                                                                                << std::endl;
    cstream << "Options:"                                                                  << std::endl;
-   cstream << "  -h                   show this screen"                                   << std::endl;
    cstream << "  -f <filename>        filename for processing"                            << std::endl;
    cstream << "  -m (words|checksum)  mode (word occurence count or checksum generation)" << std::endl;
    cstream << "  -v <word>            word to count its occurences the input file"        << std::endl;
+   cstream << "  -h                   show this screen"                                   << std::endl;
    cstream                                                                                << std::endl;
 }
 
@@ -45,8 +45,8 @@ int_fast64_t wordcount(std::ifstream &ifile, const char* s)
     int_fast64_t cnt = 0;
     assert(len > 0);
     std::streamsize buf_size = (len < 4096)?4096:len;
-    char* buf = new char[buf_size+len];
-    char* match = buf - 1;
+    char *buf = new char[buf_size+len];
+    char *match = buf - 1;
     
     ifile.read(buf,len-1);
     buf[ifile.gcount()] = 0;
