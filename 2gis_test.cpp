@@ -10,6 +10,7 @@
 //#include <cstdint>
 #include <stdint.h>
 
+typedef uint32_t checksum_t ;
 
 void usage()
 {
@@ -27,13 +28,13 @@ void usage()
    std::cout << "  -h                   show this screen"                                   << std::endl;
 }
 
-uint32_t checksum(std::ifstream &ifile)
+checksum_t checksum(std::ifstream &ifile)
 {
-    uint32_t checksum = 0;
-    const std::streamsize BUF_SIZE = 4;
+    checksum_t checksum = 0;
+    const std::streamsize BUF_SIZE = sizeof(checksum_t);
     while(ifile)
     {
-        uint32_t buf = 0;
+        checksum_t buf = 0;
         ifile.read(reinterpret_cast<char*>(&buf), BUF_SIZE);
         checksum += buf;
     }
@@ -170,7 +171,7 @@ int main(int argc, char* argv[])
     }
 
     if      (0 == std::strcmp(mode, "checksum"))
-        std::cout << std::hex << std::setw(8) << std::setfill('0') << checksum(ifile) << std::endl;
+        std::cout << std::hex << std::setw(sizeof(checksum_t)*2) << std::setfill('0') << checksum(ifile) << std::endl;
     else if (0 == std::strcmp(mode, "words"))
         std::cout << wordcount(ifile, search_str) << std::endl;
     
