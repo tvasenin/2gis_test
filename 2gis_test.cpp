@@ -27,7 +27,7 @@ void usage()
    std::cout << "  -h                   show this screen"                                   << std::endl;
 }
 
-int checksum(std::ifstream &ifile)
+uint32_t checksum(std::ifstream &ifile)
 {
     uint32_t checksum = 0;
     const std::streamsize BUF_SIZE = 4;
